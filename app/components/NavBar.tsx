@@ -3,6 +3,10 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getCart } from "../libs/cart";
 import ShoppingCartButton from "./ShoppingCartButton";
+import UserMenuButton from "./UserMenuButton";
+import { getSession } from "next-auth/react";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 type Props = {};
 async function searchProducts(formData: FormData) {
   "use server";
@@ -14,6 +18,7 @@ async function searchProducts(formData: FormData) {
 }
 export default async function NavBar({}: Props) {
   const cart = await getCart();
+  const session = await  getServerSession(authOptions);
   return (
     <div className="bg-base-100">
       <div className="navbar max-w-7xl m-auto flex-col sm:flex-row gap-2">
@@ -34,6 +39,7 @@ export default async function NavBar({}: Props) {
             </div>
           </form>
           <ShoppingCartButton cart={cart} />
+          <UserMenuButton session={session}  />
         </div>
       </div>
     </div>

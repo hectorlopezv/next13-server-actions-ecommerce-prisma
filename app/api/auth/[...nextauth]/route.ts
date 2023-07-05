@@ -23,6 +23,7 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
+    
   },
   events: {
     async signIn({ user }) {
