@@ -18,7 +18,7 @@ async function searchProducts(formData: FormData) {
 }
 export default async function NavBar({}: Props) {
   const cart = await getCart();
-  const session = await  getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   return (
     <div className="bg-base-100">
       <div className="navbar max-w-7xl m-auto flex-col sm:flex-row gap-2">
@@ -38,8 +38,11 @@ export default async function NavBar({}: Props) {
               />
             </div>
           </form>
+          <Link href="/add-product" className="btn btn-primary">
+            Add product
+          </Link>
           <ShoppingCartButton cart={cart} />
-          <UserMenuButton session={session}  />
+          <UserMenuButton session={session} />
         </div>
       </div>
     </div>
