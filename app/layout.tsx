@@ -1,7 +1,10 @@
+"use client";
+import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 
+import { SessionProvider } from "next-auth/react";
 const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,8 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <NavBar />
-        {<main className="p-4 max-w-7xl m-auto min-w-[300px]">{children}</main>}
+        <SessionProvider>
+          <NavBar />
+          <main className="p-4 max-w-7xl m-auto min-w-[300px]">{children}</main>
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );
